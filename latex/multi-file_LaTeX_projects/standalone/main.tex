@@ -1,0 +1,28 @@
+\documentclass{article}
+\usepackage[subpreambles=true]{standalone}
+%The parameter inside brackets tells LATEX to import the preamble
+%from each subfile (packages are imported only once),
+%if omitted, make sure you have all the necessary commands in the
+%main document preamble for the subfiles to work. One must be careful
+%because of possible incompatibilities in the different preambles.
+\usepackage{import}
+
+\title{Standalone package example}
+\author{Overleaf}
+\date{May 2021}
+
+\begin{document}
+
+\maketitle
+
+\section{First section}
+\import{sections/}{introduction}
+%In the body of the main document, each subfile is imported with
+%\import{}{}. The standard \input{} command can also be used,
+%but the one in this example is recommended to manage large projects
+%because it prevents errors in nested files.
+
+\section{Second section}
+\import{sections/}{section2}
+
+\end{document}

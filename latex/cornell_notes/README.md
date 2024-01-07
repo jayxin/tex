@@ -1,0 +1,2 @@
+- `tpl`: For template.(`.sty`)
+- `texmf`: For `documentclass`.(`.cls`)

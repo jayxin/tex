@@ -1,0 +1,31 @@
+%Each subfile must have its own preamble and
+%import all packages needed to work as standalone document.
+\documentclass[class=article, crop=false]{standalone}
+%This declares that this is a file to be used with
+%the standalone package.
+%class=article. Sets article as underlying class, any other class
+%can be used: book, report, etc. (except beamer).
+%crop=false. If this option is omitted the output will
+%be cropped to a minimum size.
+\usepackage[subpreambles=true]{standalone}
+%This command is not mandatory but has
+%to be used in this example because there's a nested standalone file here.
+%A tikz picture is inserted with \subimport{../}{diagram.tex}.
+
+\usepackage{import}
+\usepackage{blindtext}
+\begin{document}
+A TikZ figure will be rendered below this line
+
+\begin{figure}[ht]
+\centering
+\subimport{../}{diagram.tex}
+%This is the main feature in standalone,
+%you can import this file in any other document and recycle the code.
+%For instance, this diagram can later be used in a presentation without further changes.
+\label{fig:tikzexample}
+\caption{A nice simple diagram}
+\end{figure}
+
+\blindtext
+\end{document}

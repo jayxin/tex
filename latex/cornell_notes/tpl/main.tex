@@ -1,0 +1,239 @@
+\documentclass{article}
+
+\usepackage{ctex}
+\usepackage{cornell}
+\usepackage{mathtools}
+\usepackage{amsmath}
+
+\definecolor{pcolor}{RGB}{225,219,199}
+%\definecolor{pcolor}{RGB}{193,188,171}
+\pagecolor{pcolor}
+
+\begin{document}
+\tableofcontents
+
+\begin{cuenotes}
+    \cue{Overview}
+    \note{
+        \section{什么是代数}
+        \begin{itemize}
+            \item 算术(arithmetic): 研究整数、有理数、实数和复数的加减乘除等具体运算法则和性质.
+            \item 代数(algebra): 算术的一般化, 允许用字母等符号来代替数进行运算, 运用算术规律,
+                研究不特定的数的性质, 含有未知数的方程和解方程.
+            \item 代数结构(algebraic structure): 在一个对象集合上定义若干运算, 并
+                设定若干公理描述运算的性质.
+            \item 抽象代数(abstract algebra): 抛弃代数结构中对象集合与运算的具体意义,
+                研究运算的一般规律(交换, 结合, 分配), 研究针对运算的特殊对象及其性质,
+                并对代数结构进行分类, 研究其关系.
+        \end{itemize}
+    }
+    \cue{运算}
+    \note{
+        运算是\( S^{n} \)到\( S \)的一个函数, 称作\( n \)元运算. \\
+        常用记号:
+        \begin{itemize}
+            \item \( * \)表示二元运算, \( *(x, y) \)常记作\( x * y \).
+            \item \( \Delta \)表示一元运算.
+        \end{itemize}
+        \section*{运算的基本性质}
+        \begin{itemize}
+            \item 普遍性: \( S \)中的所有元素都可参加运算.
+                \[
+                    \forall x\forall y\exists z(x*y=z)
+                \]
+            \item 单值性: 相同的元素运算结果也相同且唯一.
+                \[
+                    \forall x\forall y\forall x^{\prime}\forall y^{\prime}
+                    (x=x^{\prime}\land y=y^{\prime}\rightarrow x*y=x^{\prime}*y^{\prime})
+                \]
+            \item 封闭性: 任何元素参加运算的结果也是\( S \)中的元素.
+                \[
+                    \forall x\forall y\exists z(x*y=z\rightarrow z\in S)
+                \]
+        \end{itemize}
+        \section*{二元运算的一般性质}
+        \begin{itemize}
+            \item 结合律.
+                \[
+                    \forall x\forall y\forall z(x,y,z\in S\rightarrow x*(y*z)=(x*y)*z)
+                \]
+            \item 交换律.
+                \[
+                    \forall x\forall y(x,y\in S\rightarrow x*y=y*x)
+                \]
+            \item \( * \)运算对\( \# \)运算满足分配律.
+                \[
+                    \forall x\forall y\forall z(x,y,z\in S\rightarrow x*(y\#z)=(x*y)\#(x*z))
+                \]
+        \end{itemize}
+    }
+    \cue{代数结构的定义}
+    \note{
+        \begin{itemize}
+            \item 非空集合\( S \), 称为代数结构的\textbf{载体};
+            \item 载体\( S \)上的若干\textbf{运算};
+            \item 一组刻画载体上各运算性质的\textbf{公理}.
+        \end{itemize}
+    }
+    \cue{幺元的定义}
+    \note{
+        代数结构\( <S,*> \)中的元素\( e \), 若对任意\( x \), 满足:
+        \[ \forall x(x*e=e*x=x) \]
+        则称\( e \)为\textbf{幺元/单位元}(identity element).
+        若仅满足:
+        \begin{itemize}
+            \item \( \forall x(x*e_r=x) \), 称作右幺元.
+            \item \( \forall x(e_l*x=x) \), 称作左幺元.
+        \end{itemize}
+    }
+    \cue{幺元的性质}
+    \note{
+        \begin{itemize}
+            \item 一般情况下, 左右幺元可能是不同的元素, 也可能有多个.
+            \item 若存在幺元则是唯一的, 而且同时是左右幺元.
+                \[ e_1=e_1*e_2=e_2 \]
+        \end{itemize}
+    }
+    \cue{零元的定义}
+    \note{
+        \( <S,*> \)中的元素\( 0 \), 若对任意\( x \)满足:
+        \[ \forall x(x*0=0*x=0) \]
+        则称\( 0 \)为零元.
+        \begin{itemize}
+            \item \( \forall x(x*0_r=0_r) \)则称作右零元;
+            \item \( \forall x(0_l*x=0_l) \)则称作左零元;
+        \end{itemize}
+    }
+    \cue{零元的性质}
+    \note{
+        若存在则唯一: \( 0_1=0_1*0_2=0_2 \).
+    }
+    \cue{零元和幺元}
+    \note{
+        对于一个二元运算:
+        \begin{itemize}
+            \item 可能同时有零元和幺元;
+            \item 可能只有零元或幺元;
+            \item 可能二者都没有.
+        \end{itemize}
+    }
+    \cue{逆元(inverse element)的定义}
+    \note{
+        \( <S,*> \)中有幺元\( e \), 若\( x*y=e \)则称.
+        \( x \)为\( y \)的左逆元, \( y \)为\( x \)的右逆元.
+        若\( x*y=y*x=e \), 那么\( x,y \)互称逆元. \( x \)的
+        逆元通常记作\( x^{-1} \). \\
+        逆元和单位元、零元不同, 前者是载体元素间的关系, 后二者是载体中的元素.
+    }
+    \cue{零元的逆元}
+    \note{
+        多余\( 1 \)个元素的载体集上零元没有逆元即: \\
+        \( <S,*> \)有幺元\( e \), 零元\( o \), 且\( \mid S\mid>1 \),
+        那么\( o \)没有左(右)逆元. \\
+        Proof: 首先\( o\neq e \), 否则\( S \)中另外有非\( o\text{或}e \)的元素\( a \),\\
+        \( o=o*a=e*a=a \), 矛盾. \\
+        若\( o \)有左(右)逆元\( x \), 那么\( o=x*o(o*x)=e \), 与\( o\neq e \)矛盾.
+    }
+    \cue{逆元的唯一性}
+    \note{
+        满足结合律的代数结构中, 逆元唯一即: \\
+        \( <S,*> \)有单位元\( e \), 且\( * \)运算满足结合律,若
+        元素\( x \)有左逆元\( l \), 右逆元\( r \)那么\( l=r=x^{-1} \). \\
+        Proof: $l=l*e=l*(x*r)=(l*x)*r=e*r=r=x^{-1}$
+    }
+    \cue{可约(cancelable)元素}
+    \note{
+        \( <S,*> \)中元素\( a \), 若对任意\( x,y\in S \)有:
+        \begin{itemize}
+            \item \( a*x=a*y \rightarrow x=y \), 即左可约;
+            \item \( x*a=y*a \rightarrow x=y \), 即右可约.
+        \end{itemize}
+        则称\( a \)为可约的. \\
+        可约是载体元素的一种性质.
+        \section*{可约性质}
+        满足结合律的代数结构中, 有逆元的元素可约, 即: \\
+        \( <S,*> \)中\( * \)运算满足结合律, 且元素\( a \)有逆元, 则\( a \)是可约的. \\
+        Proof:
+        \[
+            \begin{split}
+                a*x=a*y\iff a^{-1}*(a*x)=a^{-1}*(a*y)\iff \\
+                (a^{-1}*a)*x=(a^{-1}*a)*y\iff x=y \\
+                x*a=y*a\iff (x*a)*a^{-1}=(y*a)*a^{-1}\iff \\
+                x*(a*a^{-1})=y*(a*a^{-1})\iff x=y \\
+                \text{因此}a\text{是可约的}.
+            \end{split}
+        \]
+    }
+\end{cuenotes}
+
+\begin{cuenotes}
+    \cue{同态和同构}
+    \note{
+        同类型代数结构: \( \mid S \mid = \mid S^{\prime} \mid \)且运算的元数相同. \\
+        同构的代数结构: 存在\( S\rightarrow S^{\prime} \)的一一映射\( h \), \( S \)中
+        运算的像等于运算数像在\( S^{\prime} \)的运算结果: \( h(x*y)=h(x)*\prime h(y) \), 其中
+        \( * \)是\( S \)上的运算, 而\( *\prime \)是\( S^{\prime} \)上的运算. \\
+        \section*{同态映射(homomorphism)}
+        代数结构间更为一般性的相似关系. 对于代数结构\( <S,\Delta,\#> \)和
+        \( <S^{\prime},\Delta^{\prime},\#^{\prime}> \), 若有函数\( h \):
+        \( S\rightarrow S^{\prime} \), 对\( S \)中任意元素\( a,b \),
+        \( h(\Delta a)=\Delta^{\prime}(h(a)) \), \( h(a\# b)=h(a)\#^{\prime}h(b) \),
+        函数\( h \)就称作代数结构\( S \)到\( S^{\prime} \)的\textbf{同态映射}.
+        \begin{itemize}
+            \item 若\( h \)是单射函数, 称作单一同态.
+            \item 若\( h \)是满射函数, 称作满同态.
+            \item 若\( h \)是双射函数, 称作同构映射(isomorphism).
+        \end{itemize}
+        同态映射表明了两个代数结构间的相似、等效的关系. \\
+        e.g. \( <R,+> \)和\( <R,\cdot> \)之间存在单同态映射\( f(x)=2^{x} \):
+        \[ f(x+y)=2^{x+y}=2^{x}\cdot 2^{y}=f(x)\cdot f(y) \]
+        上面的\( <R,\cdot> \)改成\( <R^{+},\cdot> \)则\( f \)是同构映射.
+        \subsection*{满同态映射的例子}
+        \( <\Sigma^{*},\text{连接}> \)和\( <N,+> \)之间存在满同态映射
+        \( length(w)=\mid\mid w\mid\mid \). \\
+        \( length(\text{$u$连接$v$})=\mid\mid u\text{连接}v\mid\mid
+        =\mid\mid u\mid\mid+\mid\mid v\mid\mid=length(u)+length(v)
+        \)
+        表明了字符串连接和自然数加法之间的相似性. \\
+        可以用连接操作来模拟加法运算, 如DNA计算中的片段连接.
+    }
+\end{cuenotes}
+
+\begin{cuenotes}
+    \cue{同余关系(congruence relation)}
+    \note{
+        代数结构\( <S,\Delta,*> \)中,\( S \)上的一个等价关系\( \sim  \), 若满足:
+        \begin{itemize}
+            \item \( a\sim b\rightarrow \Delta a\sim \Delta b \), 称\( \sim  \)是\( S \)上关于
+                一元运算\( \Delta \)的同余关系.
+            \item \( a\sim b,c\sim d \rightarrow a*c\sim b*d \), 称\( \sim \)是\( S \)上关于
+                二元运算\( * \)的同余关系.
+            \item 若\( \sim \)是代数结构上所有的运算的同余关系, 则称\( \sim \)是
+                \( <S,\Delta,*> \)上的同余关系.
+        \end{itemize}
+        \section*{同余类}
+        同余关系体现了运算保持等价类的性质, 等价类\( [x] \)称作同余类. \\
+        e.g. 相等关系, 模\( k \)相等.
+    }
+\end{cuenotes}
+
+\begin{cuenotes}
+    \cue{各种类型的代数结构}
+    \note{
+        \( <S,*> \) --+结合律--> 半群(semigroup) --+幺元--> 独异点(monoid)
+        --+逆元--> 群(group) --+交换律--> 交换群.
+        \begin{itemize}
+            \item 半群: 运算满足结合律的代数结构.
+            \item 独异点: 含有幺元的半群.
+            \item 群: 半群, 有幺元,每个元素都有逆元, 没有零元.
+            \item 交换群(Abel group): 满足交换律的群.
+        \end{itemize}
+        环(ring): \( <R,+,*> \)有\( 2 \)个二元运算, \( <R,+> \)是交换群,
+        \( <R,*> \)是半群, \( * \)对\( + \)可分配: \( a*(b+c)=a*b+a*c \). \\
+        域(field): \( <F,+,*> \), \( <F,+,*> \)是环, \( <F-\{0\},*> \)为交换群.
+    }
+\end{cuenotes}
+
+\summary{牛逼}
+
+\end{document}

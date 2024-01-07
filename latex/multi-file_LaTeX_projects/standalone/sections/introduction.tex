@@ -1,0 +1,21 @@
+%Each subfile must have its own preamble and
+%import all packages needed to work as standalone document.
+\documentclass[crop=false]{standalone}
+\usepackage{graphicx}
+\graphicspath{{images/}}
+\usepackage{blindtext}
+
+\begin{document}
+Let's try some text. Instead of the automatically generated
+I will try one typed "by hand".
+
+\begin{figure}
+\centering
+\includegraphics[width=3cm]{overleaf-logo}
+\label{fig:lionfigure}
+\caption{Overleaf logo}
+\end{figure}
+
+\blindtext
+
+\end{document}
