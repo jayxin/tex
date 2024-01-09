@@ -1,0 +1,47 @@
+\documentclass{article}
+\usepackage{lipsum}
+\usepackage[many]{tcolorbox}
+
+\definecolor{greentitle}{RGB}{61,170,61}
+\definecolor{greentitleback}{RGB}{216,233,213}
+
+\newtcolorbox[
+  auto counter,
+  number within=section
+]{myexample}[2][]{%
+  breakable,
+  enhanced,
+  colback=white,
+  colbacktitle=white,
+  arc=0pt,
+  leftrule=1pt,
+  rightrule=0pt,
+  toprule=0pt,
+  bottomrule=0pt,
+  titlerule=0pt,
+  colframe=greentitleback,
+  fonttitle=\normalcolor,
+  overlay={
+    \node[
+      outer sep=0pt,
+      anchor=east,
+      text width=2.5cm,
+      minimum height=4ex,
+      fill=greentitleback,
+      font=\color{greentitle}\sffamily\scshape
+    ] at (title.west) {example~\thetcbcounter};
+  },
+  title=#2,
+  #1
+}
+\newcommand\Solution{\par\textbf{\textsf{Solution}}\par\medskip}
+
+\begin{document}
+
+\section{A test section}
+\begin{myexample}{Factorise $x^2-2x+1$}
+\Solution
+ \lipsum[4]
+\end{myexample}
+
+\end{document}

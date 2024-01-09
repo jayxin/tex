@@ -1,0 +1,27 @@
+\documentclass[a4paper]{report}
+\usepackage{listings}
+%
+\begin{document}
+\lstset{
+  basicstyle=\ttfamily,
+  columns=fullflexible,
+  keepspaces=true,
+}
+
+\verb|basicstyle=\ttfamily, columns=fullflexible, keepspaces=true|
+\begin{lstlisting}
+: paxos.learn ( addr n v -- Ethernet packet )
+      2 paxos.pack32          ( addr n v -- addr payload )
+      paxos.eth_type.learn    ( addr payload -- addr payload ethtype )
+      swap paxos.eth_packet ; ( addr payload ethtype -- ethernet_packet )
+\end{lstlisting}
+
+This is verbatim (and what I want):
+\begin{verbatim}
+: paxos.learn ( addr n v -- Ethernet packet )
+      2 paxos.pack32          ( addr n v -- addr payload )
+      paxos.eth_type.learn    ( addr payload -- addr payload ethtype )
+      swap paxos.eth_packet ; ( addr payload ethtype -- ethernet_packet )
+\end{verbatim}
+
+\end{document}

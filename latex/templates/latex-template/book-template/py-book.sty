@@ -1,0 +1,256 @@
+% !Mode:: "TeX:UTF-8"
+%选用geometry包及设置符合要求的边界
+\usepackage{geometry}
+\usepackage{makeidx}
+\geometry{top=2cm,bottom=2cm,left=2.5cm,right=2cm,centering}
+%生成中文的书签
+\usepackage[xetex,CJKbookmarks,linkcolor=blue,citecolor=blue,backref=page,hyperindex=true]{hyperref}
+\hypersetup{%
+    bookmarksnumbered={true},
+    pdfstartview={FitH},
+}
+\def\backref#1{{\scriptsize [#1]}}
+
+%有了这些可以使用非常爽的ams数学包和数学模式的粗字体
+\usepackage{amsmath}
+\usepackage{amsbsy}
+\usepackage[all,warning]{onlyamsmath}
+%使用多样式的参考文献包
+%\usepackage{natbib}
+\usepackage{index}
+%每章都含参考文献
+\usepackage{chapterbib}
+%选用字体设置英文字体系列
+%\usepackage{mathptmx}
+%支持图形插入功能
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{wrapfig}
+% 提供边注标题
+\usepackage{sidecap}
+\sidecaptionvpos{figure}{c}
+\usepackage{tikz}
+%支持代码和算法描述
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{listing}
+\usepackage{courier} %代码字体
+%科学计量单位
+\usepackage{siunitx}
+%颜色
+\usepackage{color}
+\usepackage{xcolor}
+%支持特别的表格
+\usepackage{multirow}
+\usepackage{multicol}
+\usepackage{slashbox}
+\usepackage{array}
+\usepackage{longtable}
+
+%建议使用的包
+\usepackage{microtype}
+\usepackage{nag}
+\usepackage{etoolbox}
+% 解决目录重叠的问题
+\usepackage{titletoc}
+\titlecontents{chapter}[0pt]{\vspace{.1\baselineskip}\large\bfseries}
+    {\thecontentslabel\hspace{2.8mm}}{}
+    {\hspace{.5em}\titlerule*[5pt]{$\cdot$}\contentspage}
+\titlecontents{section}[1.75em]{\vspace{-0.10mm}\bfseries}
+    {\thecontentslabel\hspace{4mm}}{}
+    {\hspace{.5em}\titlerule*[5pt]{$\cdot$}\contentspage}
+\titlecontents{subsection}[4.2em]{\vspace{-0.20mm}\bfseries}
+    {\thecontentslabel\hspace{4mm}}{}
+    {\hspace{.5em}\titlerule*[5pt]{$\cdot$}\contentspage}
+\titlecontents{subsubsection}[7.3em]{\vspace{-0.20mm}\bfseries}
+    {\thecontentslabel\hspace{4mm}}{}
+    {\hspace{.5em}\titlerule*[5pt]{$\cdot$}\contentspage}
+
+\titlecontents{part}[0pt]{\addvspace{3pc}}
+    {\bfseries\thecontentslabel\\*[.2pc]\large}
+    {\bfseries\LARGE}{}[\addvspace{.5pc}]
+
+\titlecontents{figure}[0pt]{\vspace{.1\baselineskip}\large\bfseries}
+    {图\thecontentslabel\hspace{2.8mm}}{}
+    {\hspace{.5em}\titlerule*[5pt]{$\cdot$}\contentspage}
+    
+\titlecontents{table}[0pt]{\vspace{.1\baselineskip}\large\bfseries}
+    {表\thecontentslabel\hspace{2.8mm}}{}
+    {\hspace{.5em}\titlerule*[5pt]{$\cdot$}\contentspage}
+
+% 代码列表目录样式的设置放在code-listing.sty这个文件中
+
+%定制页眉和页脚，并设定使用该包的页面风格
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\pagestyle{fancy}
+ \fancyhead[R]{\small\leftmark}
+ \fancyhead[L]{}
+ \fancyhead[C]{}
+ \fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+\usepackage{chngcntr}
+\numberwithin{chapter}{part}
+\numberwithin{section}{chapter}
+
+\numberwithin{figure}{chapter}
+\numberwithin{figure}{section}
+
+\numberwithin{table}{chapter}
+\numberwithin{table}{section}
+
+\renewcommand{\thepart}{\arabic{part}}
+\renewcommand\chaptermark[1]{\markboth{\thechapter\quad#1}{}}
+\renewcommand{\thefigure}{%
+    \ifnum \c@section>\z@
+        \thesection-%
+    \else
+        \ifnum \c@chapter>\z@
+            \thechapter-%
+        \fi
+    \fi\@arabic\c@figure}
+\renewcommand{\thetable}{%
+    \ifnum \c@section>\z@
+        \thesection-%
+    \else
+        \ifnum \c@chapter>\z@
+            \thechapter-%
+        \fi
+    \fi\@arabic\c@table}
+%\renewcommand\sectionmark[1]{\markright{\thesection. #1}}
+
+%标题格式定制
+\usepackage{titlesec}
+%\titleformat{\section}{\zihao{4}\bfseries\raggedright}{\S\thesection}{10pt}{}
+
+%backmatter页码设置
+ \renewcommand\backmatter{%
+  \if@openright
+    \cleardoublepage
+  \else
+    \clearpage
+  \fi
+  \@mainmatterfalse
+  \addtocontents{toc}{\protect\addvspace{3pc}}
+  \pagenumbering{roman}}
+
+%手工干预backmatter目录生成
+\appto\backmatter{\def\toclevel@chapter{-1}}
+
+%定义c++命令
+\def\cpp{{C\nolinebreak[4]\hspace{-.05em}\raisebox{.4ex}{\tiny\bf ++}}}
+
+%目录页不要页码
+\addtocontents{toc}{\protect\thispagestyle{empty}}
+\addtocontents{lof}{\protect\thispagestyle{empty}}
+\addtocontents{lot}{\protect\thispagestyle{empty}}
+
+%part标题
+\def\CTEX@part@aftername{\par\vskip 40\p@}
+\def\CTEX@part@titleformat{\zihao{0}\bfseries}
+
+
+%part页不要页码，不要counter计数
+\renewcommand\part{%
+  \if@openright
+    \cleardoublepage
+  \else
+    \clearpage
+  \fi
+  \thispagestyle{empty}%   % Original ?plain? replaced by ?emptyx
+  \addtocounter{page}{-1}%
+  \if@twocolumn
+    \onecolumn
+    \@tempswatrue
+  \else
+    \@tempswafalse
+  \fi
+  \null\vfil
+  \secdef\@part\@spart}
+
+%更好的控制浮动元素
+\setcounter{topnumber}{2}
+\setcounter{bottomnumber}{2}
+\setcounter{totalnumber}{4}
+\renewcommand{\topfraction}{0.85}
+\renewcommand{\bottomfraction}{0.85}
+\renewcommand{\textfraction}{0.15}
+\renewcommand{\floatpagefraction}{0.7}
+
+%罚点阈值，控制页首孤行或页尾孤行
+\clubpenalty = 10000
+\widowpenalty = 10000
+
+%把参考文献添加到目录中
+\renewenvironment{thebibliography}[1]
+{
+   \if@twoside
+        \cleardoublepage
+    \else
+        \clearpage
+    \fi
+    \ifx\phantomsection\undefined \else\phantomsection \fi
+    \addcontentsline{toc}{chapter}{\bibname}
+    \thispagestyle{plain}%   % Original ?plain? replaced by ?emptyx
+
+    \chapter*{\bibname}%
+    \@mkboth{\bibname}{\bibname}%
+    \list{\@biblabel{\@arabic\c@enumiv}}%
+        {\settowidth\labelwidth{\@biblabel{#1}}%
+        \leftmargin\labelwidth
+        \advance\leftmargin\labelsep
+        %\advance\leftmargin by 2em%
+        %\itemindent -2em%
+        \@openbib@code
+        \usecounter{enumiv}%
+        \let\p@enumiv\@empty
+        \renewcommand\theenumiv{\@arabic\c@enumiv}}%
+    \sloppy
+    \clubpenalty4000
+    \@clubpenalty \clubpenalty
+    \widowpenalty4000%
+    \sfcode`\.\@m}
+    {\def\@noitemerr
+        {\@latex@warning{Empty `thebibliography' environment}}%
+    \endlist}
+
+
+%封面页定义
+%---------------------------------------
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
+
+\def\maketitle{%
+  \null
+  \thispagestyle{empty}%
+  \vfill
+  \begin{center}\leavevmode
+    \normalfont
+    \HRule \\[0.4cm]
+    {\Huge \bfseries \@title\par}%
+    \vfill
+    {\Large \bfseries \@author\par}%
+    \vskip 0.4cm
+    \begin{tabular}{rl}
+     {\bfseries site:}  & {\bfseries \href{http://\@homepage}{\@homepage}} \\
+     {\bfseries email:} & {\bfseries \href{mailto:\@email}{\@email}} \\
+    \end{tabular}
+    \vskip 4cm
+    {\bfseries \@claimcopyright\par}%
+    \vskip 0.2cm
+    {\bfseries \@date\par}%
+  \end{center}%
+  \vfill
+  \null
+  \cleardoublepage
+  }
+
+\def\location#1{\def\@location{#1}}
+\def\claimcopyright#1{\def\@claimcopyright{#1}}
+\def\email#1{\def\@email{#1}}
+\def\homepage#1{\def\@homepage{#1}}
+%---------------------------------------
+\def\theaipage{\string\hyperpage{\thepage}}
+%---------------------------------------
+

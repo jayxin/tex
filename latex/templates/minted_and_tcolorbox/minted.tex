@@ -1,0 +1,199 @@
+ % !Mode:: "TeX:UTF-8"
+ %% 使用 minted 宏包前先阅读 http://www.latexstudio.net/archives/328
+ %% XeLaTeX 方式编译, TeXLive2016. 也可以直接双击 makepdf.bat 进行编译
+\documentclass[UTF8, hyperref, fontset = none]{ctexart}
+%% 中文使用伪斜体
+\xeCJKsetup{
+  AutoFakeSlant = true
+  }
+\xeCJKsetslantfactor{0.17}% 设置中文伪斜体倾斜度数
+\usepackage{geometry}
+\geometry{left=2.5cm,right=2.5cm,top=2.5cm,bottom=2.5cm}
+
+\usepackage[dvipsnames, svgnames]{xcolor}
+\usepackage[minted]{tcolorbox}
+\tcbuselibrary{skins, listings, xparse, breakable}
+
+% 字体设置
+\ctexset{fontset = none}
+% set up fonts
+\setCJKmainfont[BoldFont={SimHei}]{SimSun}
+\setCJKsansfont{SimHei}
+\setCJKmonofont{SimHei}% 中文等宽字体
+
+%%%%%%%%%%%%%%%%%%%%%% 行间代码样式 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% 其中 minted style=algol, friendly, lovelace, pastie, tango, vs, autumn, fruity, monokai, perldoc, trac, borland, igor, murphy, rrt,vim
+%%% 这些是代码的样式
+%%%%%%%%%%%% mycode 环境 %%%%%%%%%%%%%%%%%%%%%%
+% breakable 可换页
+\newtcblisting{mycode}[2]{breakable,drop shadow,listing engine=minted,minted style=trac,
+  minted language=#1,minted options={fontsize=\small,linenos,
+    numbersep=3mm},
+  listing only,
+  left=6mm,enhanced,title={#2},
+  colframe=blue!50!black,colback=blue!10!white,colbacktitle=blue!5!yellow!10!white,
+  fonttitle=\bfseries,coltitle=black,attach boxed title to top center=
+  {yshift=-0.25mm-\tcboxedtitleheight/2,yshifttext=2mm-\tcboxedtitleheight/2},
+  boxed title style={enhanced,boxrule=0.5mm,
+    frame code={ \path[tcb fill frame] ([xshift=-4mm]frame.west)
+      -- (frame.north west) -- (frame.north east) -- ([xshift=4mm]frame.east)
+      -- (frame.south east) -- (frame.south west) -- cycle; },
+    interior code={ \path[tcb fill interior] ([xshift=-2mm]interior.west)
+      -- (interior.north west) -- (interior.north east)
+      -- ([xshift=2mm]interior.east) -- (interior.south east) -- (interior.south west)
+      -- cycle;} },
+  overlay={\begin{tcbclipinterior}\fill[red!20!blue!20!white] (frame.south west)
+      rectangle ([xshift=5mm]frame.north west);\end{tcbclipinterior}}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5
+%%%%%%%%%%%%%%%%% commandshell %%%%%%%%%%%%%%%%%%%%%
+\newtcblisting{commandshell}{colback=black,colupper=white,colframe=yellow!75!black,
+	listing engine=minted,minted style=algol,
+	minted language=bash}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\usemintedstyle{algol} %%全局设置
+% 设置 perl 行内代码样式
+\usemintedstyle[perl]{algol}
+\newmintinline{perl}{showspaces} %% 行内代码样式, showspaces 代表将空格先显式的打印出来
+\begin{document}
+这是一段 perl 代码 \perlinline/my $foo = $bar;/ 行内代码示例
+\section{commandshell环境使用说明}
+
+%\begin{mycode}{language}{title}
+%Your codes
+%  bla...
+%  bla...
+%\end{mycode}
+
+\begin{commandshell}
+	ls -al
+	cd /usr/lib
+\end{commandshell}
+\section{commandbox环境使用说明}
+\DeclareTotalTCBox{\commandbox}{ s v }
+{verbatim,colupper=white,colback=black!75!white,colframe=black}
+{\IfBooleanTF{#1}{\textcolor{red}{\ttfamily\bfseries > }}{}%
+	\lstinline[language=command.com,keywordstyle=\color{blue!35!white}\bfseries]^#2^}
+
+\commandbox*{cd "My Documents"} changes to directory \commandbox{My Documents}.
+\commandbox*{dir /A} lists the directory content.
+\commandbox*{copy example.txt d:\target} copies \commandbox{example.txt} to
+\commandbox{d:\target}.
+\commandbox*{texdoc -l minted}
+\section{mycode环境使用说明}
+\begin{mycode}{java}{My Java}
+package win7.xiao;
+  
+public class duotai {
+    
+  public static void main(String[] args) {
+      // TODO Auto-generated method stub
+      /*Cat cat=new Cat();
+      cat.cry();
+      Dog dog=new Dog();*/
+      
+      /*Animal an=new Cat();
+      an.cry();
+      an=new Dog();
+      an.cry();*/
+      
+      Master master=new Master();
+      master.feed(new Dog(), new Bone());
+      master.feed(new Cat(), new Fish());
+    }
+    
+  }
+  //主人类
+  
+  class Master
+  {
+    //给动物喂食物，使用多态，方法就可以用一个
+    public void feed(Animal an,Food f)
+    {
+      an.eat();
+      f.showName();
+    }
+  }
+  class Food
+  {
+    String name;
+    public void showName()
+    {
+      
+    }
+  }
+  
+  //鱼
+  class Fish extends Food
+  {
+    public void showName()
+    {
+      System.out.println("fish");
+    }
+  }
+  
+  //骨头
+  class Bone extends Food
+  {
+    public void showName()
+    {
+      System.out.println("骨头");
+    }
+  }
+  //动物类Animal
+  class Animal
+  {
+    String name;
+    int age;
+    public String getName() {
+      return name;
+    }
+    public void setName(String name) {
+      this.name = name;
+    }
+    public int getAge() {
+      return age;
+    }
+    public void setAge(int age) {
+      this.age = age;
+    }
+    
+    //动物会叫
+    public void cry()
+    {
+      System.out.println("不知道怎么叫");
+    }
+    
+    //动物可以吃
+    public void eat()
+    {
+      System.out.println("不知道吃什么");
+    }
+  }
+  class Dog extends Animal
+  {
+    //狗叫
+    public void cry()
+    {
+      System.out.println("汪汪叫");
+    }
+    //狗吃
+    public void eat()
+    {
+      System.out.println("狗喜欢吃骨头");
+    }
+  }
+  class Cat extends Animal
+  {
+    //猫自己叫
+    public void cry()
+    {
+      System.out.println("喵喵叫");
+    }
+    //猫吃
+    public void eat()
+    {
+      System.out.println("猫喜欢吃鱼");
+    }
+  }
+\end{mycode}
+\end{document}

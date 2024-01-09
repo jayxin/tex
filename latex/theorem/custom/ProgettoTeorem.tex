@@ -1,0 +1,167 @@
+\documentclass[a4paper,12pt]{article}
+
+%primo passo: creare un environment box personalizzato
+    \usepackage{framed}
+
+    \newenvironment{Teorema}%
+    {%
+    \begin{framed}
+      \textbf{\textsf{Teorema}}%\vspace*{2em}%
+    }
+    {%
+    \end{framed}%
+    }%
+
+
+%Ipotesi con barra a sinistra
+    \newenvironment{Ipotesi}%
+    {%
+    \begin{leftbar}
+      \textbf{\textsf{Ipotesi}}
+    }
+    {%
+    \end{leftbar}%
+    }%
+  
+
+%Alternativa
+	\usepackage[framemethod=TikZ]{mdframed} %con opzione per il tratteggio
+  
+    \newenvironment{Teorema2}%
+    {%
+    \begin{mdframed}[linecolor=red]
+      \textbf{\textsf{Teorema}}%\vspace*{2em}%
+    }
+    {%
+    \end{mdframed}%
+    }%
+   
+\mdfdefinestyle{dotted}{ tikzsetting={ draw= white, dash pattern = on 3pt off 3pt } }
+   
+ \usepackage{amssymb} 
+   
+    \newenvironment{Dimostrazione2}%
+    {%
+    \begin{mdframed}[style = dotted,linecolor=red,topline
+=false,frametitle={Dimostrazione}]
+    }
+    {%
+    	\begin{flushright}
+			$\square$
+		\end{flushright}
+    \end{mdframed}%
+    }%
+
+%Tesi con Barra a sinistra    
+    \newenvironment{Tesi2}%
+    {%
+    \begin{mdframed}[bottomline=false,rightline=false,linecolor=red,frametitle={Tesi:}]
+    }
+    {%
+    \end{mdframed}%
+    }%  
+
+
+%Alternativa
+
+    %definisco l'ambiente theorem
+	\newmdtheoremenv[linecolor=blue]{lemma}{Lemma}[section]
+
+
+    \newenvironment{Teorema3}%
+    {%
+    \begin{lemma}[di Pippo]
+    }
+    {%
+	 
+    \end{lemma}%
+    }%
+
+
+
+
+
+
+
+
+
+\begin{document}
+
+\section{Tentativo}
+Bo
+Testo Testo Testo Testo Testo Testo Testo Testo Testo Testo Testo Testo Testo Testo Testo Testo Testo Testo Testo Testo Testo Testo Testo Testo Testo Testo Testo Testo Testo Testo Testo Testo Testo Testo Testo Testo Testo Testo Testo Testo Testo Testo Testo Testo Testo Testo Testo Testo Testo Testo Testo Testo Testo Testo Testo Testo Testo Testo Testo Testo 
+\begin{Teorema}
+Enunciato...
+
+	\begin{Ipotesi}
+	f tale che
+		\begin{enumerate}
+		\item puzza
+		\end{enumerate}
+	\end{Ipotesi}
+
+\end{Teorema}
+
+
+
+
+\section{Tentativo}
+
+\begin{Teorema2}
+	Enunciato...
+	\begin{Ipotesi}
+	f tale che
+		\begin{enumerate}
+		\item puzza
+		\end{enumerate}
+	\end{Ipotesi}
+
+	\begin{Tesi2}
+		\begin{enumerate}
+		\item f bulla
+		\end{enumerate}
+	\end{Tesi2}
+
+\end{Teorema2}
+
+\begin{Dimostrazione2}
+	Dimostrazione...
+
+\end{Dimostrazione2}
+
+Va quasi bene.. ma:
+\begin{itemize}
+\item la parte scrivibile dovrebbe essere piu' larga
+\item manca la numerazione dei teoremi!
+\item deve essere : carattere del testo di enunciato $\neq$ carattere testo ipotesi $\neq$ carattere testo tesi $\neq$ carattere testo dimostrazione
+\item le barrette che marcano le ipotesi devono essere separate
+
+\end{itemize}
+
+\newpage
+\section{Tentativo com md theorem}
+
+\begin{Teorema3}
+	Enunciato...
+	\begin{Ipotesi}
+	f tale che
+		\begin{enumerate}
+		\item puzza
+		\end{enumerate}
+	\end{Ipotesi}
+
+	\begin{Tesi2}
+		\begin{enumerate}
+		\item f bulla
+		\end{enumerate}
+	\end{Tesi2}
+
+\end{Teorema3}
+
+\begin{Dimostrazione2}
+	T' piacess.
+
+\end{Dimostrazione2}
+
+
+\end{document}

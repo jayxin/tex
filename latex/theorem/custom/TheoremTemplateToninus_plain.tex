@@ -1,0 +1,199 @@
+\usepackage{amsthm}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5
+%	Riferimento:
+%	http://www.dm.unibo.it/studenti/latex/tesi.php
+% http://tex.stackexchange.com/questions/45817/theorem-definition-lemma-problem-numbering
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% TEOREMI
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%DEFINIZIONE
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[chapter]
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%NOTAZIONE   (WIP) (troppo non standard, nel plain deve diventare definizione base o testo semplice)
+%\newtheorem{notationfix}{Definition}[chapter]
+\newenvironment{notationfix}[1]
+    {
+		\begin{definition}
+		
+    }
+    { 
+    
+		\end{definition}
+	}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Remark (WIP)
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%TAKE AWAY MASSAGE (WIP)
+%\newtheorem{TAM}{Remark}
+\newenvironment{TAM}[1]
+    {
+		\begin{remark}
+		
+    }
+    { 
+    
+		\end{remark}
+	}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Observation (WIP)
+%\newtheorem{observation}{Remark}
+\newenvironment{observation}[1]
+    {
+		\begin{remark}
+    }
+    { 
+		\end{remark}
+	}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% EXAMPLE  (WIP)
+\newtheorem{example}{Example}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% NotaBene (WIP)
+\newenvironment{NB}[1]
+    {
+		\begin{description}
+			\item[N.B. :]
+			
+			
+    }
+    { 
+		\end{description}    
+	}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%con opzione per il tratteggio
+	\usepackage[framemethod=TikZ]{mdframed}  
+	\mdfdefinestyle{dotted}{ tikzsetting={ 
+		draw= white, 
+		dash pattern = on 3pt off 3pt 
+	}	}
+   
+
+
+
+ 	\usepackage{amssymb} 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Ipotesi con barra a sinistra
+
+	\usetikzlibrary{calc}
+%	\usepackage{fourier-orns}
+	\tikzset{
+  		box/.style={
+      		rectangle,
+      		draw=red,
+      		fill=white,
+      		scale=1,
+      		overlay
+    }		}
+
+	\mdfdefinestyle{hypothesis}{%
+ 		hidealllines=true,leftline=true,
+ 		skipabove=12,skipbelow=12pt,
+ 		innertopmargin=0.4em,%
+ 		innerbottommargin=0.4em,%
+ 		innerrightmargin=0.7em,%
+ 		rightmargin=0.7em,%
+ 		innerleftmargin=1.7em,%
+ 		leftmargin=0.7em,%
+ 		middlelinewidth=.2em,%
+ 		linecolor=blue,%
+ 		firstextra={\path let \p1=(P), \p2=(O) in ($(\x2,0)+(0,\y1)$) 
+                           node[box] {\textcolor{blue}{Hp:}};},%
+ 		secondextra={\path let \p1=(P), \p2=(O) in ($(\x2,0)+(0,\y1)$) 
+                           node[box] {\textcolor{blue}{Hp:}};},%
+ 		middleextra={\path let \p1=(P), \p2=(O) in ($(\x2,0)+(0,\y1)$) 
+                           node[box] {\textcolor{blue}{Hp:}};},%
+ 		singleextra={\path let \p1=(P), \p2=(O) in ($(\x2,0)+(0,\y1)$) 
+                           node[box] {\textcolor{blue}{Hp:}};},%
+	}
+
+\newmdenv[style=hypothesis]{hypothesis}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Tesi con barra a sinistra
+
+	\mdfdefinestyle{thesis}{%
+ 		hidealllines=true,leftline=true,
+ 		skipabove=12,skipbelow=12pt,
+ 		innertopmargin=0.4em,%
+ 		innerbottommargin=0.4em,%
+ 		innerrightmargin=0.7em,%
+ 		rightmargin=0.7em,%
+ 		innerleftmargin=1.7em,%
+ 		leftmargin=0.7em,%
+ 		middlelinewidth=.2em,%
+ 		linecolor=blue,%
+ 		firstextra={\path let \p1=(P), \p2=(O) in ($(\x2,0)+(0,\y1)$) 
+                           node[box] {\textcolor{blue}{Th:}};},%
+ 		secondextra={\path let \p1=(P), \p2=(O) in ($(\x2,0)+(0,\y1)$) 
+                           node[box] {\textcolor{blue}{Th:}};},%
+ 		middleextra={\path let \p1=(P), \p2=(O) in ($(\x2,0)+(0,\y1)$) 
+                           node[box] {\textcolor{blue}{Th:}};},%
+ 		singleextra={\path let \p1=(P), \p2=(O) in ($(\x2,0)+(0,\y1)$) 
+                           node[box] {\textcolor{blue}{Th:}};},%
+	}
+
+\newmdenv[style=thesis]{thesis}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Danger box (WIP).
+% It encapsulates a piece of text that needs revision
+% http://tex.stackexchange.com/questions/52023/mdframed-put-something-on-the-start-of-one-vertical-left-rule
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newenvironment{Warning}[1]
+    {
+		\begin{description}
+			\item[!danger!]
+    }
+    { 
+			\item[!danger!]
+		\end{description}    
+	}
+

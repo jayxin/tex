@@ -1,0 +1,53 @@
+ 
+\documentclass{book}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{empheq}
+\usepackage{bookman}
+\usepackage[framemethod=tikz]{mdframed}
+
+\definecolor{ocre}{RGB}{243,102,25}
+\definecolor{mygray}{RGB}{243,243,244}
+
+\newcommand*\mymathbox[1]{%
+  \fcolorbox{ocre}{mygray}{\hspace{1em}#1\hspace{1em}}}
+
+\newtheoremstyle{mystyle}
+  {\topsep}
+  {\topsep}
+  {\normalfont}
+  {}
+  {\sffamily\bfseries}
+  {.}
+  {.5em}
+  {{\color{ocre}\thmname{#1}~\thmnumber{#2}}\thmnote{\,--\,#3}}%
+\theoremstyle{mystyle}
+\newmdtheoremenv[
+  backgroundcolor=mygray,
+  linecolor=ocre,
+  leftmargin=20pt,
+  innerleftmargin=0pt,
+  innerrightmargin=0pt,
+  ]{theo}{Theorem}[section]
+
+\begin{document}
+
+\chapter{Test chapter}
+\section{Test section}
+
+\begin{theo}[Name of the theorem]
+In $E=\mathbb{R}^n$ all norms are equivalent.
+\begin{align}
+a &= b\\
+E &= mc^2 + \int_a^a x\, \mathrm{d}x
+\end{align}
+\end{theo}
+
+\begin{empheq}[box=\mymathbox]{align}
+a&=b\\
+E&=mc^2 + \int_a^a x\, \mathrm{d}x
+\end{empheq}
+
+\end{document}
+ 

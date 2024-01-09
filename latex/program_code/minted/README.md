@@ -1,0 +1,3 @@
+- 安装 Python
+- `pip install Pygments`
+- 编译: `xelatex -shell-escape main.tex`

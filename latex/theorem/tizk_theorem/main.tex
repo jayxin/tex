@@ -1,0 +1,76 @@
+\documentclass{book}
+\usepackage{tikz}
+\usepackage{xcolor}
+\usepackage{environ}
+\usepackage{amsmath,mathrsfs,amsfonts}
+\usepackage{xparse}
+
+\usetikzlibrary{shapes,decorations}
+\definecolor{bule}{RGB}{18,29,57}
+\definecolor{bablue}{RGB}{248,248,248}
+\definecolor{main}{RGB}{127,191,51}
+\definecolor{seco}{RGB}{0,145,215}
+\definecolor{thid}{RGB}{180,27,131}
+
+
+\newcommand{\newfancytheoremstyle}[5]{%
+  \tikzset{#1/.style={draw=#3, fill=#2,very thick,rectangle,
+      rounded corners, inner sep=10pt, inner ysep=20pt}}
+  \tikzset{#1title/.style={fill=#3, text=#2}}
+  \expandafter\def\csname #1headstyle\endcsname{#4}
+  \expandafter\def\csname #1bodystyle\endcsname{#5}
+}
+
+\newfancytheoremstyle{fancythrm}{blue!10}{seco}{\bfseries\sffamily}{\sffamily}
+
+\makeatletter
+\DeclareDocumentCommand{\newfancytheorem}{ O{\@empty} m m m O{fancythrm} }{%
+  % define the counter for the theorem
+  \ifx#1\@empty
+    \newcounter{#2}
+  \else
+    \newcounter{#2}[#1]
+    \numberwithin{#2}{#1}
+  \fi
+  %% define the "newthem" environment
+  \NewEnviron{#2}[1][{}]{%
+    \noindent\centering
+    \begin{tikzpicture}
+      \node[#5] (box){
+        \begin{minipage}{0.93\columnwidth}
+          \csname #5bodystyle\endcsname \BODY~##1
+        \end{minipage}};
+      \node[#5title, right=10pt] at (box.north west){
+        {\csname #5headstyle\endcsname #3 \stepcounter{#2}\csname the#2\endcsname\; ##1}};
+      \node[#5title, rounded corners] at (box.east) {#4};
+    \end{tikzpicture}
+  }[\par\vspace{.5\baselineskip}]
+}
+\makeatother
+
+% Define new styles
+% \newfancytheoremstyle{<name>}{inner color}{outer color}{head style}{body style}
+\newfancytheoremstyle{fancydef}{green!10}{green}{\itshape\sffamily}{\sffamily}
+
+% Define some new environments
+% \newfancytheorem[<number within>]{<name>}{<head>}{<symbol>}[<style>]
+\newfancytheorem[chapter]{newthem}{Theorem}{$\clubsuit$}
+\newfancytheorem[section]{newcor}{Corollary}{$\heartsuit$}
+
+\newfancytheorem{newdef}{Definition}{$\spadesuit$}[fancydef]
+
+\begin{document}
+
+\begin{newthem}
+    test
+\end{newthem}
+
+\begin{newcor}
+  test
+\end{newcor}
+
+\begin{newdef}
+  test
+\end{newdef}
+
+\end{document}

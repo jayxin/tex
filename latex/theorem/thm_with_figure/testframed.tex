@@ -1,0 +1,85 @@
+\documentclass{ctexart}
+
+\usepackage{lipsum}
+\usepackage{capt-of}
+\usepackage[margin=2cm]{geometry}
+\usepackage{tcolorbox}
+\usepackage{varwidth}
+\usepackage{amsmath}
+\tcbuselibrary{breakable}
+\tcbuselibrary{skins}
+\tcbuselibrary{xparse}%xparse . sty定义的NewDocumentCommand
+\definecolor{frameinnercolor}{RGB}{49,44,44}
+
+
+\newcounter{theorem}
+\numberwithin{theorem}{section}% numberwithin是amsmath定义
+\NewTColorBox{theobox}{o m +o}{% o省略可能的参数、m必备的参数、+是多行里，也可以表示。
+%# 1 =标题（省略可), # 2 =定理环境名，# 3 = tcolorbox追加的选项
+enhanced,frame empty,interior empty,
+coltitle=white,fonttitle=\bfseries,colbacktitle=frameinnercolor,
+extras broken={frame empty,interior empty},
+borderline={0.5mm}{0mm}{frameinnercolor},
+sharp corners=downhill,
+breakable=true,
+top=4mm,
+before skip=3.5mm,
+attach boxed title to top left={yshift=-3mm,xshift=5mm},
+boxed title style={boxrule=0pt,sharp corners=all},varwidth boxed title,
+IfNoValueTF={#1}{title=#2~\thetheorem.}{title=#2~\thetheorem:~#1},
+IfNoValueTF={#3}{}{#3}%第三个参数省略- NoValue -返回
+}
+
+\NewDocumentEnvironment{theorem}{o m +o}{%NewDocumentEnvironment由xparse.sty定义
+\refstepcounter{theorem}\begin{theobox}[#1]{#2}[#3]}{\end{theobox}}
+
+\NewDocumentEnvironment{theo}{o +d""}{%d""表示作为省略的一部分。
+\begin{theorem}[#1]{定理}[#2]
+}{\end{theorem}}
+
+\NewDocumentEnvironment{law}{o +d""}{%
+\begin{theorem}[#1]{法则}[#2]
+}{\end{theorem}}
+
+
+\begin{document}
+
+\section{测试定理}
+
+\begin{theo}[Title]
+ \lipsum[1]
+\end{theo}
+
+\begin{law}[库仑定律]"sidebyside,
+sidebyside align=top seam,
+sidebyside gap=5mm,
+righthand width=4.4cm,
+lower separated=false,%
+halign lower=flush right,
+"%
+查尔斯·库仑1785年，
+收取称重小球之间起作用的扭力测量，
+带电粒子之间作用的力正比于各电荷的产物，
+成反比的距离平方（按平方反比定律）日前宣布，它（以下公式）。
+\begin{equation*}
+ F=k\frac{q_1 q_2}{r^2} \quad
+\left(
+\begin{array}{ll}
+  q_1, q_2\text{充带电粒子的电荷量}\\[3pt]
+ r\text{粒子距离}
+\end{array}
+\right)
+\end{equation*}
+
+用该公式计算时，不要把电荷的正负符号代入公式中，计算过程可用绝对值计算，可根据同名电荷相斥，异名电荷相吸来判断力的方向。
+
+在库仑定律的常见表述中，通常会有真空和静止，是因为库仑定律的实验基础——扭秤实验，为了排除其他因素的影响，是在亚真空中做的。另外，一般讲静电现象时，常由真空中的情况开始，所以库仑定律中有“真空”的说法。实际上，库仑定律不仅适用于真空中，还适用于均匀介质中，也适用于静止的点电荷之间。
+
+\tcblower
+ \includegraphics[width=4.6cm]{Bcoulomb}
+\captionof{figure}{库仑扭秤}
+\end{law}
+
+库仑定律只适用于点电荷之间。带电体之间的距离比它们自身的大小大得多，以至形状、大小及电荷的分布状况对相互作用力的影响可以忽略，在研究它们的相互作用时，人们把它们抽象成一种理想的物理模型——点电荷，库仑定律只适用于点电荷之间的受力。
+
+\end{document}

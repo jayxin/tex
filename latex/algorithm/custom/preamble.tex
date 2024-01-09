@@ -1,0 +1,253 @@
+% Preamble file to include all required packages and 
+
+% Basic packages for mathematics
+\usepackage{etex, amsmath, amssymb, amsthm, latexsym, mathtools}
+
+
+% Formatting packages
+\usepackage{a4wide, fancyhdr, titlesec, lipsum, ragged2e, microtype, thmtools, ccicons, needspace, setspace, framed, lipsum, mdframed}
+% a4wide	- Sets the geometry to use a reasonable amount of width
+% fancyhdr	- Gives us interesting headers and footers
+% titlesec	- Define different formatting and fonts for titles
+% lipsum	- Automatically generate Lorem Ipsum text
+% ragged2e	- Improve ragged right tex
+% microtype	- Letter spacing
+% thmtools	- Theorem styling
+% ccicons	- Text icons for Creative Commons
+% needspace	- Prevent page breaks between example heads and bodies
+% setspace	- Define singlespace areas
+% framed	- For shaded quotes
+% lipsum	- For lorem ipsum
+% mdframed	- For framing the Algorithm style
+
+
+% Packages to make tables useful and pretty
+\usepackage{booktabs, array, multicol, multirow, longtable, lscape}
+% booktabs	- Make nice tables by banishing \hline
+% array		- Set widths on table columns
+% multicol	- Allow cells to span columns
+% multirow	- Allow cells to span rows
+% longtable	- Enable pagebreaks in a table
+% lscape	- Enable landscape mode
+
+\usepackage[table]{xcolor}
+
+% Relevant graphics packages
+\usepackage{graphicx, wrapfig, titlepic, textpos, tikz, pgfplots}
+% graphicx	- Include graphics
+% wrapfig	- Allow text to wrap around figures
+% titlepic	- Add a picture to the title page (requires titlepage option for articles)
+% textpos	- Absolute positioning on the page
+% tikz		- For tikzpictures
+% pgfplots	- For charts
+
+% Packages for dual thesis/paper use
+\usepackage{xspace, etoolbox, todonotes, appendix}
+% xspace	- Clever spacing when defining new commands
+% etoolbox	- Conditional logic
+% todonotes	- Add notes for things that need doing
+% appendix	- Add appendix title
+
+% Other packages required
+\usepackage{listings, enumitem}
+% listings	- Automatically colour code
+% enumitem	- Customise lists
+
+% Natbib, for the Author Year citation styles
+\usepackage[round]{natbib}
+
+% Fonts
+\usepackage{fontspec, unicode-math}
+\defaultfontfeatures{Scale=MatchLowercase}
+
+\setmainfont[Ligatures=TeX, Numbers=OldStyle]{Linux Libertine O}
+%\setmainfont{Hoefler Text}
+\setsansfont[Mapping=tex-text]{Helvetica}
+\setmonofont{Consolas}
+
+\newcommand{\dispnums}{\fontspec[Ligatures=TeX]{Linux Libertine O}}
+
+\setmathfont[Numbers=OldStyle]{Cambria Math}
+% use Libertine for the letters
+\setmathfont[range=\mathit/{latin,Latin,num,Greek,greek}, Numbers=OldStyle]{Linux Libertine O Italic}
+\setmathfont[range=\mathup/{latin,Latin,num,Greek,greek}, Numbers=OldStyle]{Linux Libertine O}
+\setmathfont[range=\mathbfup/{latin,Latin,num,Greek,greek}, Numbers=OldStyle]{Linux Libertine O Bold Italic}
+%\setmathfont[range={"2202}]{Linux Libertine O}% "02202 = \partial % doesn't work
+\setmathfont[range={"221E}]{Linux Libertine O}% "0221E = \infty
+% etc. (list should be completed depending on needs)
+\setmathfont[range={"025BE}]{XITS Math} % \blacktriangledown
+
+\usepackage{tocloft}
+% tocloft	- TOC formatting
+
+% Change the space between page numbers and dots in the TOC, and typeset everything in sans serif
+\cftsetpnumwidth{2em}
+\renewcommand{\cfttoctitlefont}{\Huge \sffamily \bfseries}
+
+\renewcommand{\cftpartfont}{\sffamily \bfseries \Large}
+\renewcommand{\cftpartpagefont}{\sffamily \bfseries \Large}
+
+\renewcommand{\cftchappagefont}{\sffamily \bfseries \large}
+\renewcommand{\cftchapfont}{\sffamily \bfseries \large}
+
+\renewcommand{\cftsecfont}{\sffamily}
+\renewcommand{\cftsecpagefont}{\sffamily}
+
+\renewcommand{\cftsubsecfont}{\sffamily}
+\renewcommand{\cftsubsecpagefont}{\sffamily}
+
+
+% The pdf version will have hyperlinks and extra details, so set \ispdfversion to 'true' to get those (defined in Guide.tex).
+\newbool{pdfversion}
+\setbool{pdfversion}{\ispdfversion}
+
+\ifbool{pdfversion}{
+	\usepackage{hyperref}
+	% \hyperref	- For hyperlinks
+	\hypersetup{
+	    pdftitle	 = {Problem-Solving in Undergraduate Mathematics and Computer-aided Assessment},    % title
+	    pdfauthor	 = {M.~S.~Badger},     % author
+	    pdfsubject	 = {Problem-solving},   % subject of the document
+	    pdfcreator	 = {Matthew Badger},   % creator of the document
+	    pdfproducer	 = {Matthew Badger}, % producer of the document
+	    pdfkeywords	 = {Mathematics} {Problem-solving} {Moore Method} {Computer-aided Assessment}, % list of keywords
+	    pdfnewwindow = true,
+		colorlinks	 = true,
+		linkcolor	 = red!40!black,
+		citecolor	 = blue!60!black,
+		urlcolor	 = green!60!black,
+		unicode      = true
+	}
+}
+
+%%%% Page formatting %%%%
+
+% Allow LaTeX leeway to get rid of widows and orphans
+% \setlength{\parskip}{2ex plus 1ex minus 1ex}
+\widowpenalty=1000
+\clubpenalty=1000
+
+% Tweak the margins to match requirements, vary depending on whether it's the pdf or print version.
+\setlength{\topmargin}{-0.5cm}
+\setlength{\footskip}{1cm}
+\setlength{\evensidemargin}{0cm}
+\setlength{\textwidth}{16cm}
+\setlength{\textheight}{22cm}
+\setlength{\vfuzz}{1pc}
+\setlength{\hfuzz}{1pc}
+
+\ifbool{pdfversion}{
+	\linespread{1.0}
+	\setlength{\oddsidemargin}{0cm}
+}{
+	\linespread{2.0}
+	\setlength{\oddsidemargin}{0.5cm}
+}
+
+% Set the titles in sans font
+
+\titleformat{\part}                                     % Level begin redefined
+	[display]                                           % Paragraph shape (display, block, etc.)
+	{\thispagestyle{empty} \Large \bfseries \sffamily}	% Formatting of the whole title; label + text
+	{\centering Part \thepart}                          % Label, usually \Xtitlename\ \theX
+	{0pt}                                               % Horizontal separation between label and body
+	{\centering \Huge}                                  % Code preceeding the title body
+
+\titleformat{\chapter}									% Level begin redefined
+	[display]											% Paragraph shape (display, block, etc.)
+	{\thispagestyle{empty} \sffamily\large\bfseries}	% Formatting of the whole title; label + text
+	{\centering \chaptertitlename\ \thechapter}			% Label, usually \Xtitlename\ \theX
+	{0pt}												% Horizontal separation between label and body
+	{\centering \huge}									% Code preceeding the title body
+	[]													% Code after the title body
+  
+\titleformat*{\section}{\sffamily\Large\bfseries}
+\titleformat*{\subsection}{\sffamily\large\bfseries}
+\titleformat*{\subsubsection}{\sffamily\bfseries}
+
+% Define the different types of theorem
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+
+\newcommand{\exrule}{\rule{\textwidth-4em}{1pt}}
+	
+\declaretheoremstyle[
+	headfont		= \sffamily\bfseries,			% Head font
+	headformat		= $\blacktriangledown$ \NAME~\NUMBER\NOTE\vspace{-3mm},	% LaTeX for the header; \NAME, \NUMBER and \NOTE supplied by thmtools, be careful with spacing
+	postheadhook	= ~\newline\exrule\newline,		% Punctuation after the head
+	notefont		= \itshape,						% Fond of the note (example name in this case)
+	notebraces		= {--- }{},						% Braces before and after note; again be careful with spaces.
+	bodyfont		= \itshape \rmfamily \linespread{1.05}, % Body font and formatting
+	preheadhook		= \quote,						% Hook before the head
+	postheadspace	= 0pt,							% Space after the head; we want none as we have a new line already
+	prefoothook		= \ifhmode \hspace*{\fill}\newline \else \vspace{-5mm} \fi \exrule,	% Hook for LaTeX code before the foot of the example (the space below it). If we're in horizontal mode, add a new line, otherwise just draw the ruled line. This makes 90% of the examples require no manual spacing.
+	postfoothook	= \endquote
+	]{examplestyle}
+	
+\declaretheorem[style=examplestyle, numberwithin=section]{example}
+
+
+\declaretheoremstyle[
+	spaceabove		= 15pt, spacebelow=15pt,		% Space above and below the entire example
+	headfont		= \sffamily\bfseries,			% Head font
+	headformat		= \NAME~\NUMBER\NOTE\vspace{-3mm},	% LaTeX for the header; \NAME, \NUMBER and \NOTE supplied by thmtools, be careful with spacing
+	headpunct		= \newline\newline,				% Punctuation after the head
+	notefont		= \itshape,						% Fond of the note (example name in this case)
+	notebraces		= {--- }{},						% Braces before and after note; again be careful with spaces.
+	bodyfont		= \sffamily\bfseries,			% Body font and formatting
+	postheadspace	= 10pt							% Space after the head
+	]{algorstyle}
+
+\theoremstyle{algorstyle}
+\newmdtheoremenv[linecolor=black, leftmargin=30, rightmargin=30, skipabove=20pt, skipbelow=20pt]{algorithm}%
+	{Algorithm}[section]
+
+% For quote shading
+\ifbool{pdfversion}{
+	\definecolor{shadecolor}{rgb}{0.93,0.95,1}
+}{
+	\definecolor{shadecolor}{rgb}{0.95,0.95,0.95}
+}
+
+
+% Basic mathematics commands
+
+\newcommand{\R}{{\mathbb R}}
+\newcommand{\N}{{\mathbb N}}
+\newcommand{\Z}{{\mathbb Z}}
+\newcommand{\Q}{{\mathbb Q}}
+\newcommand{\F}{{\mathbb F}}
+\renewcommand{\C}{{\mathbb C}}
+\renewcommand{\T}{{\mathbb T}}
+
+\newcommand{\<}{\langle}
+\renewcommand{\>}{\rangle}
+
+\newcommand{\ftt}{\footnotesize\texttt}
+
+\newcommand{\ie}{\emph{i.e.\@} }
+\newcommand{\etc}{\emph{etc.\@} }
+
+% The following command adds space to either side of the symbol above an xrightarrow
+\newcommand*{\myrightarrow}[1]{\xrightarrow{\mathmakebox[2em]{#1}}}
+
+% Create the @ symbol
+
+\makeatletter
+\def\imod#1{\allowbreak\mkern10mu({\operator@font mod}\,\,#1)}
+\makeatother
+
+\newfontfamily\quotefont[Ligatures=TeX]{Linux Libertine O}
+
+% Command for the open quotes
+\newcommand*{\openquote}{\tikz[remember picture,overlay,xshift=-15pt,yshift=-13pt]
+     \node (OQ) {\quotefont\fontsize{60}{60}\selectfont``};\kern0pt}
+
+% Wrap everything in its own environment
+\newenvironment{shadequote}%
+{\begin{snugshade}\begin{quote}\openquote}
+{\hfill\end{quote}\end{snugshade}}

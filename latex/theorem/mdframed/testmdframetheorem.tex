@@ -1,0 +1,76 @@
+\documentclass[a4paper,10pt]{ctexart}
+\usepackage{amsmath,amsthm,mathrsfs,amsfonts,amssymb}
+\usepackage{xcolor}
+\usepackage{mdframed} 
+\theoremstyle{definition}
+\mdfdefinestyle{theoremstyle}{%
+linecolor=gray!40,linewidth=.5pt,%
+backgroundcolor=gray!10,
+skipabove=8pt,
+skipbelow=5pt,
+innerleftmargin=7pt,
+innerrightmargin=7pt,
+frametitlerule=true,%
+frametitlerulewidth=.5pt,
+frametitlebackgroundcolor=gray!15,
+frametitleaboveskip=0pt,
+frametitlebelowskip=0pt,
+innertopmargin=.4\baselineskip,
+innerbottommargin=.4\baselineskip,
+shadow=true,shadowsize=3pt,shadowcolor=black!20,
+theoremseparator={.},
+}
+
+\mdtheorem[style=theoremstyle]{defi}{$\blacklozenge$定义}[section]
+\mdtheorem[style=theoremstyle]{prop}{$\blacklozenge$命题}
+\mdtheorem[style=theoremstyle]{theo}{$\blacklozenge$定理}
+\mdtheorem[style=theoremstyle]{lem}[defi]{$\blacklozenge$引理}
+\mdtheorem[style=theoremstyle]{coro}[defi]{$\blacklozenge$推论}
+\mdtheorem[style=theoremstyle]{axiom}[defi]{$\blacklozenge$公理} 
+\begin{document}
+\section{测试定理}
+本文分享的是关于定理定义与推论等的设计方法与设计展示，以最为简单的定理定义为例子进行样式的展示。
+\begin{defi}在~$(a,b)$~上给定函数~$f(x)$，$x_0\in(a,b)$，若
+\begin{equation}\label{eq:sec3.1-1}
+\lim_{x\to x_0}f(x)=f(x_0),
+\end{equation}
+则称函数~$f(x)$~在~$x_0$~点连续，$x_0$~称为\emph{连续点}，否则就称~$x_0$~为\emph{间断点}。
+\end{defi}
+直观地说，就是当动点~$x$~趋于定点~$x_0$~时，若动点函数值趋于定点的函数值，则函数在~$x_0$~点连续。若~$x_0$~是连续点，则
+当自变量在~$x_0$~点有无限小的变化，引起因变量的变化也无限的小。
+\begin{theo}[Darboux定理]
+\label{theo:riemann}
+设~$f(x)\in C^{(1)}[a, b]$。若~$f'(a)<f'(b)$，证明对任意~$\eta$，若~$\eta$~满足
+\begin{equation}
+ f'(a)<\eta<f'(b),
+\end{equation}
+则存在~$\xi\in(a, b)$，使得~$f'(\xi)=\eta$。
+\end{theo}
+\begin{proof}
+不妨设~$f(x)$~单调上升。那么对任意~$x_0\in(a,b)$，当~$x\to x_0-0$~时，函数值~$f(x)$~上升，并有上界~$f(x_0)$，所以极限存在，且
+\[
+  \lim_{x\to x_0-0}f(x)=f(x_0-0)\leq f(x_0)
+\]
+同理，当~$x\to x_0+0$~时，函数值~$f(x)$~下降，并有下界~$f(x_0)$，所以极限存在，且
+\[
+  \lim_{x\to x_0+0}f(x)=f(x_0+0)\geq f(x_0)
+\]
+若~$f(x_0-0)=f(x_0+0)$，则~$x_0$~是函数的连续点；若~$f(x_0-0)\neq f(x_0+0)$，则~$x_0$~是函数的第一类间断点。由于~$x_0$~的
+任意性，所以区间上每一点不是连续点就是第一类间断点。
+\end{proof}
+\begin{prop}
+设给定实数~$x_1,x_2$，且~$x_1<x_2$，总可以找到有理数~$q_1,q_2$，使得
+\[
+  x_1<q_1<q_2<x_2,
+\]
+因此
+\[
+  a^{x_1}=\sup_{q\leq x_1}\{a^q\}\leq a^{q_1}<a^{q_2}\leq\sup_{q\leq x_2}\{a^q\}=a^{x_2},
+\]
+即~$a^x$~在~$\mathbb{R}$~上严格上升。
+\end{prop}
+
+\begin{lem}\label{lem:sec3.4-1}
+设~$a>1$，$n$~为正整数，则存在实数~$b>1$，使得~$a=b^n$~或者~$\sqrt[n]a=b$。
+\end{lem}
+\end{document} 

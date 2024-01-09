@@ -1,0 +1,63 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage{fancybox}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{times}
+%
+\begin{document}
+\section{Counting Numbers of Uppercase Characters}
+\begin{center}
+  \begin{lstlisting}[language={[ANSI]C},
+  numbers=left,
+  numberstyle=\tiny,
+  basicstyle=\small\ttfamily,
+  stringstyle=\color{purple},
+  keywordstyle=\color{blue}\bfseries,
+  commentstyle=\color{olive},
+  directivestyle=\color{blue},
+  frame=shadowbox,
+  %framerule=0pt,
+  %backgroundcolor=\color{pink},
+  rulesepcolor=\color{red!20!green!20!blue!20}
+  %rulesepcolor=\color{brown}
+  %xleftmargin=2em,xrightmargin=2em,aboveskip=1em
+  ]
+/*===================================================
+* FileName: counter.c
+* Author  : Shaobin Li <shawpinlee@gmail.com>
+* Date    : 2007-09-13
+* Description: count numbers of uppercase
+* characters from input streams, and output
+* the numbers respectively.
+*=================================================*/
+#include <stdio.h>
+#include <stdbool.h>
+#include <ctype.h>
+
+#define SIZE 26
+
+int
+main (int argc, char *argv[])
+{
+  int array[SIZE];
+  int i;
+  char c;
+
+  for (i = 0; i < SIZE; i++)
+  array[i] = 0;
+
+  while ((c = getchar ()) != EOF)
+  {
+    if (isupper (c))
+    {
+      array[c - 'A']++;
+    }
+  }
+  for (i = 0; i < 26; i++)
+  printf ("%c:%5d\n", (char) ('A' + i), array[i]);
+
+  return 0;
+}
+  \end{lstlisting}
+\end{center}
+\end{document}

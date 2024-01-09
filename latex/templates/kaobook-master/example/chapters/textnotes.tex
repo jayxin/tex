@@ -1,0 +1,69 @@
+\renewcommand*{\chapterformat}
+{
+  \enskip\mbox{\scalebox{4}{\thechapter\autodot}}
+}
+\renewcommand\chapterlinesformat[3]
+{
+  \parbox[b]{\textwidth+\marginparsep+\marginparwidth}{\hrulefill#2}\par%
+  #3%
+  %\parbox[b]{\textwidth+\marginparsep+\marginparwidth}{\hrulefill}%
+}
+\setchapterpreamble[u]{\margintoc}
+\chapter{Sidenotes and Marginnotes}
+
+\section{Sidenotes}
+
+To insert a sidenote, just enter the command \verb|\sidenote{Text of the note}|. You can specify a mark\sidenote[O]{This sidenote has a 
+	special mark} with \verb|\sidenote[mark]{Text}|, or you can specify 
+an offset and a mark with \verb|\sidenote[offset][mark]{Text}|, in which 
+case the mark can be empty. If you want to know more, read the 
+documentation of the \verb|snotez| package.
+
+Sidenotes are handled through the \verb|snotez| package, which relies on 
+the \verb|marginnote| package. The sidenote counter is never reset, but 
+if you want you can reset it at every chapter.
+
+\section{Marginnotes}
+
+\marginnote{\blindtext}
+
+\subsection{Usage}
+
+This command is similar to the previous one: you can use it like 
+\verb|\marginnote[offset]{Text}|, where the offset argument can be left 
+out.
+
+\subsection{Details}
+
+We load the packages \verb|marginnote|, \verb|marginfix| and 
+\verb|placeins|. Since \verb|snotez| uses \verb|marginnote|, what we say 
+for marginnotes is also valid for sidenotes. The style of marginnotes 
+and captions is the same, and the notes are shifted slightly upwards 
+(\verb|\renewcommand{\marginnotevadjust}{-11pt}|) in order to allineate 
+them to the bottom of the line of text where the marginnote is issued.
+
+\marginnote[*-1.5]{The offset option can be either a length or a 
+	multiple of \texttt{baselineskip}, \eg 
+	\texttt{\\marginnote[*-3]{Text}}.}
+
+\section{Footnotes}
+
+Footnotes force the reader to constantly move from one area of the page 
+to the other. Arguably marginnotes solve this issue, so you should not 
+use footnotes. Nevertheless, for completeness, we provide the standard 
+command \verb|\footnote|, just in case you want to put a footnote once 
+in a while\footnote{And this is how they look like.}.
+
+\section{Margintoc}
+
+Since we are talking about margins, we introduce here the 
+\verb|\margintoc| command, which accepts a parameter for the vertical 
+offset, like so: \verb|\margintoc[offset]|. It can be used in any point 
+of the document, but we think it makes sense to use it at the beginning 
+of chapters or parts. We like to put it in the chapter preamble, with 
+this code:
+
+\begin{verbatim}
+	\setchapterpreamble[u]{\margintoc}
+	\chapter{Sidenotes and Marginnotes}
+\end{verbatim}

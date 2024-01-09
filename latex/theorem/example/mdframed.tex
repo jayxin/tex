@@ -1,0 +1,56 @@
+\documentclass{article}
+\usepackage{chngcntr}
+\usepackage[tikz]{mdframed}
+\usepackage{lipsum}
+
+\definecolor{greentitle}{RGB}{61,170,61}
+\definecolor{greentitleback}{RGB}{216,233,213}
+
+\newcounter{mdexample}
+\counterwithin{mdexample}{section}
+
+\newenvironment{myexample}[1]
+  {\stepcounter{mdexample}\begin{mdframed}[
+    frametitle=#1,
+    frametitlefont=\normalfont,
+    topline=false,
+    bottomline=false,
+    rightline=false,
+    linecolor=greentitleback,
+    linewidth=2pt,
+    singleextra={
+      \node[
+        overlay,
+        outer sep=0pt,
+        anchor=north east,
+        text width=2.5cm,
+        minimum height=4ex,
+        fill=greentitleback,
+        font=\color{greentitle}\sffamily\scshape
+      ] at (O|-P) {example~\themdexample};
+      },
+    firstextra={
+      \node[
+        overlay,
+        outer sep=0pt,
+        anchor=north east,
+        text width=2.5cm,
+        minimum height=4ex,
+        fill=greentitleback,
+        font=\color{greentitle}\sffamily\scshape
+      ] at (O|-P) {example~\themdexample};
+      }
+    ]
+  }
+  {\end{mdframed}}
+\newcommand\Solution{\par\textbf{\textsf{Solution}}\par\medskip}
+
+\begin{document}
+
+\section{A test section}
+\begin{myexample}{Factorise $x^2-2x+1$}
+\Solution
+ \lipsum[4]
+\end{myexample}
+
+\end{document}

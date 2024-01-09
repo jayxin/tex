@@ -1,0 +1,305 @@
+%primo passo: creare un environment box personalizzato
+%   Preambolo personalizzato 
+%		Inscatolamento di teoremi, dimostrazioni e definizioni con diversi colori
+%
+%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% i colori di questa pagina http://en.wikibooks.org/wiki/LaTeX/Colors#The_68_standard_colors_known_to_dvips 
+%\usepackage[usenames,dvipsnames]{color}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%con opzione per il tratteggio
+	\usepackage[framemethod=TikZ]{mdframed}  
+	\mdfdefinestyle{dotted}{ tikzsetting={ 
+		draw= white, 
+		dash pattern = on 3pt off 3pt 
+	}	}
+   
+
+
+
+ 	\usepackage{amssymb} 
+   
+
+ 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%definisco l'ambiente theorem
+\mdfdefinestyle{theoremstyle}{
+	linecolor=blue,
+	middlelinewidth=2pt,
+	skipabove=10pt,
+%	leftmargin=-10pt,
+%	rightmargin=-10pt,
+	everyline = true,
+}
+
+	\newmdtheoremenv[style=theoremstyle]{lemma}{Lemma}[section]
+	\newmdtheoremenv[style=theoremstyle]{theorem}{Theorem}[section]
+	\newmdtheoremenv[style=theoremstyle]{corollary}{Corollary}[section]
+	\newmdtheoremenv[style=theoremstyle]{proposition}{Proposition}[section]
+
+
+%   Fancy Version
+
+\newcounter{Lemma}[section]
+\newenvironment{Lemma}[1][]{%
+  \stepcounter{Lemma}%
+  \ifstrempty{#1}%
+  {\mdfsetup{%
+    frametitle={%
+      \tikz[baseline=(current bounding box.east),outer sep=0pt]
+      \node[line width=1pt,anchor=east,rectangle,draw=blue!20,fill=white]
+    {\strut \color{blue}{Lemma}~\theLemma};}}
+  }%
+  {\mdfsetup{%
+    frametitle={%
+      \tikz[baseline=(current bounding box.east),outer sep=0pt]
+      \node[line width=1pt,anchor=east,rectangle,draw=blue!20,fill=white]
+    {\strut \color{blue}{Lemma}~\theLemma:~\color{gray}{#1}};}}%
+  }%
+  \mdfsetup{innertopmargin=10pt,linecolor=blue!20,%
+            linewidth=1pt,topline=true,%
+            frametitleaboveskip=\dimexpr-\ht\strutbox\relax,}
+  \begin{mdframed}[]\relax%
+  }{\end{mdframed}}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Ipotesi con barra a sinistra
+
+	\usetikzlibrary{calc}
+%	\usepackage{fourier-orns}
+	\tikzset{
+  		box/.style={
+      		rectangle,
+      		draw=red,
+      		fill=white,
+      		scale=1,
+      		overlay
+    }		}
+
+	\mdfdefinestyle{hypothesis}{%
+ 		hidealllines=true,leftline=true,
+ 		skipabove=12,skipbelow=12pt,
+ 		innertopmargin=0.4em,%
+ 		innerbottommargin=0.4em,%
+ 		innerrightmargin=0.7em,%
+ 		rightmargin=0.7em,%
+ 		innerleftmargin=1.7em,%
+ 		leftmargin=0.7em,%
+ 		middlelinewidth=.2em,%
+ 		linecolor=blue,%
+ 		firstextra={\path let \p1=(P), \p2=(O) in ($(\x2,0)+(0,\y1)$) 
+                           node[box] {\textcolor{blue}{Hp:}};},%
+ 		secondextra={\path let \p1=(P), \p2=(O) in ($(\x2,0)+(0,\y1)$) 
+                           node[box] {\textcolor{blue}{Hp:}};},%
+ 		middleextra={\path let \p1=(P), \p2=(O) in ($(\x2,0)+(0,\y1)$) 
+                           node[box] {\textcolor{blue}{Hp:}};},%
+ 		singleextra={\path let \p1=(P), \p2=(O) in ($(\x2,0)+(0,\y1)$) 
+                           node[box] {\textcolor{blue}{Hp:}};},%
+	}
+
+\newmdenv[style=hypothesis]{hypothesis}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Tesi con barra a sinistra
+
+	\mdfdefinestyle{thesis}{%
+ 		hidealllines=true,leftline=true,
+ 		skipabove=12,skipbelow=12pt,
+ 		innertopmargin=0.4em,%
+ 		innerbottommargin=0.4em,%
+ 		innerrightmargin=0.7em,%
+ 		rightmargin=0.7em,%
+ 		innerleftmargin=1.7em,%
+ 		leftmargin=0.7em,%
+ 		middlelinewidth=.2em,%
+ 		linecolor=blue,%
+ 		firstextra={\path let \p1=(P), \p2=(O) in ($(\x2,0)+(0,\y1)$) 
+                           node[box] {\textcolor{blue}{Th:}};},%
+ 		secondextra={\path let \p1=(P), \p2=(O) in ($(\x2,0)+(0,\y1)$) 
+                           node[box] {\textcolor{blue}{Th:}};},%
+ 		middleextra={\path let \p1=(P), \p2=(O) in ($(\x2,0)+(0,\y1)$) 
+                           node[box] {\textcolor{blue}{Th:}};},%
+ 		singleextra={\path let \p1=(P), \p2=(O) in ($(\x2,0)+(0,\y1)$) 
+                           node[box] {\textcolor{blue}{Th:}};},%
+	}
+
+\newmdenv[style=thesis]{thesis}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Dimostrazione, Tratteggiato da appendere sotto la proposizione
+\mdfdefinestyle{proofstyle}{
+	style = dotted,
+	linecolor=blue,
+	skipabove=0pt,
+	topline =false,
+}
+ 
+ 
+    \newenvironment{proof}%
+    {%
+    \begin{mdframed}[style = proofstyle,frametitle={Proof:}]
+    }
+    {%
+    	\begin{flushright}
+			$\square$
+		\end{flushright}
+    \end{mdframed}%
+    }%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%DEFINIZIONE
+\mdfdefinestyle{definitionstyle}{
+	linecolor=red,
+	middlelinewidth=2pt,
+	frametitlerule=true,
+	frametitlerulecolor=green!60,
+%	frametitlerulewidth =1pt,
+%	innertopmargin= \topskip ,
+	skipabove=3pt,
+}
+
+\mdtheorem[ style = definitionstyle ]{definition}{Definition}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%NOTAZIONE   (WIP)
+\mdfdefinestyle{notationstyle}{
+	roundcorner=5pt,
+	linecolor=green,
+	middlelinewidth=2pt,
+	frametitlerule=true,
+	frametitlerulecolor=green!60,
+%	frametitlerulewidth =1pt,
+%	innertopmargin= \topskip ,
+	frametitle={Notation fixing},
+	skipabove=3pt,
+}
+
+\newmdenv[style=notationstyle]{notationfix}
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%TAKE AWAY MASSAGE (WIP)
+\mdfdefinestyle{takeawaystyle}{
+	linecolor=gray,
+	middlelinewidth=1pt,
+	frametitlerule=true,
+	frametitle={Take Away Message},
+	skipabove=3pt,
+}
+
+\newmdenv[style=takeawaystyle]{TAM}
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% EXAMPLE  (WIP)
+\mdfdefinestyle{examplestyle}{
+  	linecolor=yellow,
+   % frametitle={\textbf{Example:}\colorbox{white}{\space#1\space}},
+    innertopmargin=10pt,
+    frametitleaboveskip=-\ht\strutbox,
+    frametitlealignment=\center
+}
+
+\mdtheorem[style=examplestyle]{example}{Example: }
+
+% Fancy http://tex.stackexchange.com/questions/69148/how-to-insert-title-in-mdframed
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Observation (WIP)
+\mdfdefinestyle{observationstyle}{
+	linecolor=magenta,
+	middlelinewidth=1pt,
+	frametitlerule=true,
+%	frametitle={Observation},	
+	skipabove=3pt,
+}
+
+%\newmdenv[style=observationstyle]{observation}
+\mdtheorem[ style = observationstyle ]{observation}{Observation}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Remark (WIP)
+\mdfdefinestyle{remarkstyle}{
+	linecolor=cyan,
+	middlelinewidth=1pt,
+	frametitlerule=true,
+	frametitle={Remark:},	
+	skipabove=3pt,
+}
+
+\newmdenv[style=remarkstyle]{remark}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% NotaBene (WIP)
+\newenvironment{NB}[1]
+    {
+		\begin{description}
+			\item[N.B. :]
+			
+			
+    }
+    { 
+		\end{description}    
+	}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Danger box (WIP).
+% It encapsulates a piece of text that needs revision
+% http://tex.stackexchange.com/questions/52023/mdframed-put-something-on-the-start-of-one-vertical-left-rule
+
+\definecolor{warningColor}{named}{red}
+\tikzset{
+  warningsymbol/.style={
+      rectangle,
+      draw=warningColor,
+      fill=white,
+      scale=1,
+      overlay}
+}
+
+\mdfdefinestyle{warning}{%
+ hidealllines=true,leftline=true,
+ skipabove=12,skipbelow=12pt,
+ innertopmargin=0.4em,%
+ innerbottommargin=0.4em,%
+ innerrightmargin=0.7em,%
+ rightmargin=0.7em,%
+ innerleftmargin=1.7em,%
+ leftmargin=0.7em,%
+ middlelinewidth=.2em,%
+ linecolor=warningColor,%
+ fontcolor=warningColor,%
+ firstextra={\path let \p1=(P), \p2=(O) in ($(\x2,0)+0.5*(0,\y1)$) 
+                           node[warningsymbol] {\danger};},%
+ secondextra={\path let \p1=(P), \p2=(O) in ($(\x2,0)+0.5*(0,\y1)$) 
+                           node[warningsymbol] {\danger};},%
+ middleextra={\path let \p1=(P), \p2=(O) in ($(\x2,0)+0.5*(0,\y1)$) 
+                           node[warningsymbol] {\danger};},%
+ singleextra={\path let \p1=(P), \p2=(O) in ($(\x2,0)+0.5*(0,\y1)$) 
+                           node[warningsymbol] {\danger};},%
+}
+
+\newmdenv[style=warning]{Warning}

@@ -1,0 +1,28 @@
+%listings 中高亮定界符内的文本而不高亮定界符本身
+\documentclass{article}
+%
+\usepackage[usenames,dvipsnames]{xcolor}
+\usepackage{listings}
+%
+\def\beginlstdelim#1#2#3{
+  \def\endlstdelim{#2\egroup}%
+  \ttfamily#1\bgroup\color{#3}\aftergroup\endlstdelim%
+}
+%
+\lstset{
+  moredelim = **[is][\beginlstdelim{\$}{\$}{orange}]{\$}{\$},
+  moredelim = **[is][\beginlstdelim{\{}{\}}{ForestGreen}]{\{}{\}},
+  moredelim = **[is][\beginlstdelim{[}{]}{red}]{[}{]},
+}
+%
+\begin{document}
+\begin{lstlisting}
+\documentclass{article}
+\usepackage{amsmath}
+\begin{document}
+$E = mc^2$
+{E = mc^2}
+[E = mc^2]
+\end{document}
+\end{lstlisting}
+\end{document}
